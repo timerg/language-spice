@@ -1,0 +1,138 @@
+fileTypes: [
+  "sp"
+  "cir"
+  "ckt"
+  "tech"
+  "mat"
+  "input"
+  "mesh_in"
+  "struct"
+]
+foldingStartMarker: "(?i:(^\\.subckt|^\\.macro))\\b"
+foldingStopMarker: "(?i:(^\\.ends|^.endm))\\b"
+name: "Spice"
+patterns: [
+  {
+    begin: "^.*$\\n?"
+    beginCaptures:
+      "0":
+        name: "comment.line.spice"
+    end: "(?=not)possible"
+    patterns: [
+      {
+        begin: "\""
+        end: "\""
+        name: "string.quoted.double.untitled"
+        patterns: [
+          {
+            match: "\\\\."
+            name: "constant.character.escape.untitled"
+          }
+        ]
+      }
+      {
+        begin: "'"
+        end: "'"
+        name: "string.quoted.single.untitled"
+        patterns: [
+          {
+            match: "\\\\."
+            name: "constant.character.escape.untitled"
+          }
+        ]
+      }
+      {
+        match: "(?i:(^\\.(end|probe|tran|ac|op|dc|Solver)))\\b"
+        name: "keyword.other.spice"
+      }
+      {
+        captures:
+          "5":
+            name: "variable.other.spice"
+        match: "(?i:(^\\.(print(\\s+(tran|dc|ac))?)))\\b\\s+(.+)"
+        name: "keyword.other.spice"
+      }
+      {
+        captures:
+          "2":
+            name: "variable.other.spice"
+          "3":
+            name: "variable.other.spice"
+          "4":
+            name: "constant.numeric.spice"
+        match: "(?i:(^[crlkg]\\w*))\\b(\\s+\\w+)?(\\s+\\w+)?(\\s+(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?(?i:(meg|m|u|n|p|f|g|t|k))?)?"
+        name: "keyword.other.spice"
+      }
+      {
+        captures:
+          "2":
+            name: "variable.other.spice"
+          "3":
+            name: "variable.other.spice"
+          "4":
+            name: "constant.numeric.spice"
+        match: "(?i:(^[Solver|#include|HeatSolverView|Atar]\\w*))?"
+        name: "keyword.other.spice"
+      }
+      {
+        captures:
+          "2":
+            name: "variable.other.spice"
+          "3":
+            name: "variable.other.spice"
+          "4":
+            name: "variable.other.spice"
+          "5":
+            name: "variable.other.spice"
+          "6":
+            name: "constant.numeric.spice"
+        match: "(?i:(^e\\w*))\\b(\\s+\\w+)?(\\s+\\w+)?(\\s+\\w+)?(\\s+\\w+)?(\\s+(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?(?i:(meg|m|u|n|p|f|g|t|k))?)?"
+        name: "keyword.other.spice"
+      }
+      {
+        captures:
+          "2":
+            name: "variable.other.spice"
+          "3":
+            name: "variable.other.spice"
+          "4":
+            name: "constant.numeric.spice"
+        match: "(?i:(^[vi]\\w*))\\b(\\s+\\w+)?(\\s+\\w+)?(\\s+(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?(?i:(meg|m|u|n|p|f|g|t|k))?)?(\\s+(?i:pwl|pulse|dc|ac))?"
+        name: "keyword.other.spice"
+      }
+      {
+        captures:
+          "3":
+            name: "variable.other.spice"
+        match: "(?i:(^[xqmd]\\w*|^\\.(subckt|macro|ends|endm|)))\\b((\\s+\\w+)*)"
+        name: "keyword.other.spice"
+      }
+      {
+        match: "\\b((([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?(?i:(meg|m|u|n|p|f|g|t|k))?[sS]?)\\b"
+        name: "constant.numeric.spice"
+      }
+      {
+        match: "(?i:(^\\.(options?|param)))\\b\\s+(?i:(jobcontrol|model|laser|optconn|fiber|photodiode|ind_source))?"
+        name: "keyword.other.spice"
+      }
+      {
+        captures:
+          "1":
+            name: "support.variable.spice"
+        match: "\\b(\\w+)\\s*="
+      }
+      {
+        captures:
+          "1":
+            name: "variable.other.spice"
+        match: "(?i:^\\.model)\\b(\\s+\\w+)?(\\s+\\w+)?"
+        name: "keyword.other.spice"
+      }
+      {
+        match: "^\\*.*"
+        name: "comment.line.spice"
+      }
+    ]
+  }
+]
+scopeName: "source.spice"
