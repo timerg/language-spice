@@ -63,17 +63,17 @@ patterns: [
         match: "(?i:(^[crlkg]\\w*))\\b(\\s+\\w+)?(\\s+\\w+)?(\\s+(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?(?i:(meg|m|u|n|p|f|g|t|k))?)?"
         name: "keyword.other.spice"
       }
-      {
-        captures:
-          "2":
-            name: "variable.other.spice"
-          "3":
-            name: "variable.other.spice"
-          "4":
-            name: "constant.numeric.spice"
-        match: "(?i:(^[Solver|#include|HeatSolverView|Atar]\\w*))?"
-        name: "keyword.other.spice"
-      }
+    #   {
+    #     captures:
+    #       "2":
+    #         name: "variable.other.spice"
+    #       "3":
+    #         name: "variable.other.spice"
+    #       "4":
+    #         name: "constant.numeric.spice"
+    #     match: "(?i:(^[Solver|#include|HeatSolverView|Atar]\\w*))?"
+    #     name: "keyword.other.spice"
+    #   }
       {
         captures:
           "2":
