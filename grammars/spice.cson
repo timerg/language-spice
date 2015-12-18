@@ -1,5 +1,7 @@
 fileTypes: [
   "sp"
+  "lis"
+  "l"
   "cir"
   "ckt"
   "tech"
