@@ -133,7 +133,7 @@ repository:
             beginCaptures:
              "1":
                 name: "keyword.other.elemnt.spice"
-            end: "($\\n)"
+            end: "(^(?!\\+))"
             name: "variable.other.spice"
             patterns: [
                 {
@@ -152,15 +152,24 @@ repository:
             ]
           }
           {
-            captures:
-              "2":
-                name: "variable.other.spice"
-              "3":
-                name: "variable.other.spice"
-              "4":
-                name: "constant.numeric.spice"
-            match: "(?i:(^[crlkg]\\S*))(\\s+\\S+)?(\\s+\\S+)?(\\s+(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?(?i:(meg|m|u|n|p|f|g|t|k))?)?"
-            name: "keyword.other.element.spice"
+            begin: "(?i:(^[crlk]\\S*))"
+            beginCaptures:
+                "1":
+                    name: "keyword.other.cplkg.spice"
+            end: "(^(?!\\+))"
+            name: "variable.parameter.spice"
+            patterns: [
+                # {
+                # match: "(\\s+\\S+)(\\s+\\S+)"
+                # name: "variable.other.spice"
+                # }
+                {
+                    include: "#numbers_"
+                }
+                {
+                    include: "#parameters"
+                }
+            ]
           }
           {
             captures:
@@ -177,7 +186,7 @@ repository:
             beginCaptures:
              "1":
                 name: "keyword.other.elemnt.spice"
-            end: "($\\n)"
+            end: "(^(?!\\+))"
             name: "variable.other.spice"
             patterns:  [
               {
@@ -211,14 +220,25 @@ repository:
             name: "keyword.other.spice"
           }
           {
-            begin: "(?i:(^\\.(meas|measure)))"
+            begin: "(?i:(^\\.(meas|measure)\\s+(dc|ac|tran)\\s+(\\S+)))"
             beginCaptures:
                 "1":
                     name:"keyword.other.spice"
-            end: "($\\n)"
+                "2":
+                    name:"keyword.other.spice"
+                "3":
+                    name:"variable.parameter.spice"
+            end: "(^(?!\\+))"
             patterns:[
                 {
-
+                include: "#numbers_"
+                }
+                {
+                include: "#parameter"
+                }
+                {
+                match: "(?i:((targ|trig|find|when|max|min|rms|pp|avg|deriv|derivative|err\\d?|integ|integral)\\b))"
+                name: "support.function.spice"
                 }
             ]
           }
