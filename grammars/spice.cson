@@ -118,7 +118,7 @@ repository:
   sweep_:
       patterns:  [
           {
-            match: "(?i:(^\\.(tran|ac|op|dc|Solver)))\\b"
+            match: "(?i:(^(\\s+)?\\.(tran|ac|op|dc|Solver)))\\b"
             name: "keyword.other.simulate.spice"
           }
           {
@@ -129,7 +129,7 @@ repository:
   elemnts_:
       patterns:  [
           {
-            begin: "(?i:(^[eghf]\\S*))"
+            begin: "(?i:(^(\\s+)?[eghf]\\S*))"
             beginCaptures:
              "1":
                 name: "keyword.other.elemnt.spice"
@@ -152,17 +152,17 @@ repository:
             ]
           }
           {
-            begin: "(?i:(^[crlk]\\S*))"
+            begin: "(?i:(^(\\s+)?[crlk]\\S*))"
             beginCaptures:
                 "1":
                     name: "keyword.other.cplkg.spice"
             end: "(^(?!\\+))"
             name: "variable.parameter.spice"
             patterns: [
-                # {
-                # match: "(\\s+\\S+)(\\s+\\S+)"
-                # name: "variable.other.spice"
-                # }
+                {
+                match: "(\\s+\\S+)(\\s+\\S+)"
+                name: "variable.other.spice"
+                }
                 {
                     include: "#numbers_"
                 }
@@ -182,7 +182,7 @@ repository:
   source:
       patterns:  [
           {
-            begin: "(?i:(^[vi]\\S+))"
+            begin: "(?i:([vi]\\S+))"
             beginCaptures:
              "1":
                 name: "keyword.other.elemnt.spice"
@@ -190,7 +190,7 @@ repository:
             name: "variable.other.spice"
             patterns:  [
               {
-                  match: "(?i:(\\s(pwl|pulse|dc|ac)))"
+                  match: "(?i:(\\s(pwl|pulse|dc|ac|sin)))"
                   name: "keyword.other.spice"
               }
               {
@@ -205,22 +205,22 @@ repository:
             captures:
               "6":
                 name: "keyword.other.spice"
-            match: "(?i:(^\\.((print|probe|pz|tf)(\\s+(tran|dc|ac))?)))"  #\\b\\s+(.+)"
+            match: "(?i:(\\.((print|probe|pz|tf)(\\s+(tran|dc|ac))?)))"  #\\b\\s+(.+)"
             name: "keyword.other.spice"
           }
           {
-            match: "(?i:(^\\.(options?|param)))\\b\\s+(?i:(jobcontrol|model|laser|optconn|fiber|photodiode|ind_source))?"
+            match: "(?i:(\\.(options?|param)))\\b\\s+(?i:(jobcontrol|model|laser|optconn|fiber|photodiode|ind_source))?"
             name: "keyword.other.spice"
           }
           {
             captures:
               "1":
                 name: "variable.other.spice"
-            match: "(?i:^\\.model)\\b(\\s+\\w+)?(\\s+\\w+)?"
+            match: "(?i:\\.model)\\b(\\s+\\w+)?(\\s+\\w+)?"
             name: "keyword.other.spice"
           }
           {
-            begin: "(?i:(^\\.(meas|measure)\\s+(dc|ac|tran)\\s+(\\S+)))"
+            begin: "(?i:(\\.(meas|measure)\\s+(dc|ac|tran)\\s+(\\S+)))"
             beginCaptures:
                 "1":
                     name:"keyword.other.spice"
