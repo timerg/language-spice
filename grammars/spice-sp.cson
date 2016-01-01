@@ -1,13 +1,5 @@
 fileTypes: [
-  "lis"
-  "l"
-  "cir"
-  "ckt"
-  "tech"
-  "mat"
-  "input"
-  "mesh_in"
-  "struct"
+  "sp"
 ]
 foldingStartMarker: "(?i:(^\\.subckt|^\\.macro))\\b"
 foldingStopMarker: "(?i:(^\\.ends|^.endm))\\b"
@@ -27,6 +19,18 @@ patterns: [
           include: "#quoted"
       }
       {
+          include: "#elemnts_"
+      }
+      {
+          include: "#sweep_"
+      }
+      {
+          include: "#source"
+      }
+      {
+          include: "#operation"
+      }
+      {
           include: "#comments"
       }
       {
@@ -34,9 +38,6 @@ patterns: [
       }
       {
           include: "#lib"
-      }
-      {
-          include: "#operation"
       }
       {
           include: "#subckt"
@@ -168,6 +169,22 @@ repository:
             ]
           }
       ]
+  lib:
+      patterns:  [
+          {
+            captures:
+                "1":
+                  name: "keyword.other.spice"
+            match: "(?i:((\\s+)?\\.lib))"
+          }
+          {
+            captures:
+              "1":
+                name: "variable.other.spice"
+            match: "(?i:\\.model)\\b(\\s+\\w+)?(\\s+\\w+)?"
+            name: "keyword.other.spice"
+          }
+      ]
   source:
       patterns:  [
           {
@@ -221,25 +238,8 @@ repository:
                 {
                 match: "(?i:((targ|trig|find|when|max|min|rms|pp|avg|deriv|derivative|err\\d?|integ|integral)\\b))"
                 name: "support.function.spice"
-
                 }
             ]
-          }
-      ]
-  lib:
-      patterns:  [
-          {
-            captures:
-                "1":
-                  name: "keyword.other.spice"
-            match: "(?i:((\\s+)?\\.lib))"
-          }
-          {
-            captures:
-              "1":
-                name: "variable.other.spice"
-            match: "(?i:\\.model)\\b(\\s+\\w+)?(\\s+\\w+)?"
-            name: "keyword.other.spice"
           }
       ]
   subckt:
