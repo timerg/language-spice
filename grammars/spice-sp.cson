@@ -189,7 +189,7 @@ repository:
             name: "keyword.other.spice"
           }
           {
-            match: "(?i:(\\.(options?|param)))\\b\\s+(?i:(jobcontrol|model|laser|optconn|fiber|photodiode|ind_source))?"
+            match: "(?i:((\\.options?|\\.param)))\\b\\s+(?i:(jobcontrol|model|laser|optconn|fiber|photodiode|ind_source))?"
             name: "keyword.other.spice"
           }
           {
