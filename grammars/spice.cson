@@ -65,7 +65,7 @@ patterns: [
     #         name: "variable.other.spice"
     #       "6":
     #         name: "constant.numeric.spice"
-    #     match: "(?i:(^e\\S*))(\\s+\\S+)?(\\s+\\S+)?(\\s+\\w+)?(\\s+\\w+)?(\\s+(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?(?i:(meg|m|u|n|p|f|g|t|k))?)?"
+    #     match: "(?i:(^e\\S*))(\\s+\\S+)?(\\s+\\S+)?(\\s+\\w+)?(\\s+\\w+)?(\\s+(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?(?i:(k|meg|x|g|t||m|u|n|p|f|a))?)?"
     #     name: "keyword.other.spice"
     #   }
     ]
@@ -82,7 +82,7 @@ repository:
   numbers_:
       patterns:  [
           {
-            match: "\\b((([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?(?i:(meg|m|u|n|p|f|g|t|k))?[sSva]?)\\b"
+            match: "\\b((([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?(?i:(k|meg|x|g|t|m|u|n|p|f|a))?[sSva]?)\\b"
             name: "constant.numeric.spice"
           }
       ]
@@ -167,11 +167,19 @@ repository:
                 }
             ]
           }
+          {
+            begin: "(?i:(^(\\s+)?[xqmd]\\S+)\\b)"
+            beginCaptures:
+                "1":
+                    name: "keyword.other.spice"
+            end: "(^(\\s+)?(?!\\+))"
+            name: "variable.other.spice"
+          }
       ]
   source:
       patterns:  [
           {
-            begin: "(?i:([vi]\\S+))"
+            begin: "(?i:(^(\\s+)?[vi]\\S+))"
             beginCaptures:
              "1":
                 name: "keyword.other.elemnt.spice"
@@ -191,10 +199,7 @@ repository:
   operation:
       patterns:  [
           {
-            captures:
-              "6":
-                name: "keyword.other.spice"
-            match: "(?i:(\\.((print|probe|pz|tf)(\\s+(tran|dc|ac))?)))"  #\\b\\s+(.+)"
+            match: "(?i:((\\.print|\\.probe|\\.pz|\\.tf)\\s+(tran|dc|ac)?))"
             name: "keyword.other.spice"
           }
           {
@@ -202,13 +207,13 @@ repository:
             name: "keyword.other.spice"
           }
           {
-            begin: "(?i:(\\.(meas|measure)\\s+(dc|ac|tran)\\s+(\\S+)))"
+            begin: "(?i:((\\.meas|\\.measure)\\s+(dc|ac|tran)\\s+(\\S+)))"
             beginCaptures:
-                "1":
-                    name:"keyword.other.spice"
                 "2":
                     name:"keyword.other.spice"
                 "3":
+                    name:"keyword.other.spice"
+                "4":
                     name:"variable.parameter.spice"
             end: "(^(\\s+)?(?!\\+))"
             patterns:[
@@ -245,13 +250,14 @@ repository:
   subckt:
       patterns: [
           {
-            begin: "(?i:(\\.(subckt|macro)(\\s+\\S+)))"
+            begin: "(?i:((\\.subckt|\\.macro)(\\s+\\S+)))"
             beginCaptures:
-                "1":
-                    name: "meta.other.ckt&model.spice"
                 "2":
-                    name: "entity.name.circuit.spice"
+                    name: "keyword.other.subckt.spice"
+                "3":
+                    name: "variable.other.subckt.spice"
             end: "(^(\\s+)?(?!\\+))"
+            name: "meta.subckt.spice"
             patterns:  [
                 {
                 include: "#parameters"
@@ -266,14 +272,6 @@ repository:
             match: "(?i:(^(\\s+)?\\.(ends|endm)))"
             name: "keyword.other.spice"
           }
-          {
-            captures:
-              "3":
-                name: "variable.other.spice"
-            match: "(?i:(^[xqmd]\\w*))\\b((\\s+\\w+)*)"
-            name: "keyword.other.spice"
-          }
-
       ]
   parameters:
       patterns:  [
@@ -283,7 +281,7 @@ repository:
                 name: "variable.parameter.spice"
               "4":
                 name: "constant.numeric.spice"
-            match: "\\b((?!dc|ac)\\w+)(\\s+)?=(\\s+)?((([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?(?i:(meg|m|u|n|p|f|g|t|k))?)?"
+            match: "\\b((?!dc|ac)\\w+)(\\s+)?=(\\s+)?((([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?(?i:(k|meg|x|g|t|m|u|n|p|f|a))?)?"
           }
       ]
 scopeName: "source.spice"
