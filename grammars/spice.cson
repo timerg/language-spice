@@ -142,6 +142,9 @@ repository:
                     include: "#quoted"
                 }
                 {
+                    include: "#comments"
+                }
+                {
                 match: "(?i:(opamp|(poly|pwl)(\\(\\d+\\))?|aba))"
                 name: "support.type.spice"
                 }
@@ -165,6 +168,12 @@ repository:
                 {
                     include: "#parameters"
                 }
+                {
+                    include: "#quoted"
+                }
+                {
+                    include: "#comments"
+                }
             ]
           }
           {
@@ -174,28 +183,51 @@ repository:
                     name: "keyword.other.spice"
             end: "(^(\\s+)?(?!\\+))"
             name: "variable.other.spice"
+            patterns: [
+                {
+                    include: "#numbers_"
+                }
+                {
+                    include: "#parameters"
+                }
+                {
+                    include: "#quoted"
+                }
+                {
+                    include: "#comments"
+                }
+            ]
           }
       ]
   source:
       patterns:  [
-          {
+        {
             begin: "(?i:(^(\\s+)?[vi]\\S+))"
             beginCaptures:
-             "1":
-                name: "keyword.other.elemnt.spice"
+                "1":
+                    name: "keyword.other.elemnt.spice"
             end: "(^(\\s+)?(?!\\+))"
             name: "variable.other.spice"
             patterns:  [
-              {
+                {
                   match: "(?i:(\\s(pwl|pulse|dc|ac|sin)))"
                   name: "keyword.other.spice"
-              }
-              {
-                  include: "#numbers_"
-              }
+                }
+                {
+                    include: "#numbers_"
+                }
+                {
+                    include: "#parameters"
+                }
+                {
+                    include: "#quoted"
+                }
+                {
+                    include: "#comments"
+                }
             ]
         }
-      ]
+    ]
   operation:
       patterns:  [
           {
@@ -203,7 +235,7 @@ repository:
             name: "keyword.other.spice"
           }
           {
-            match: "(?i:(\\.(options?|param)))\\b\\s+(?i:(jobcontrol|model|laser|optconn|fiber|photodiode|ind_source))?"
+            match: "(?i:((\\.options?|\\.param)))\\b\\s+(?i:(jobcontrol|model|laser|optconn|fiber|photodiode|ind_source))?"
             name: "keyword.other.spice"
           }
           {
@@ -218,10 +250,16 @@ repository:
             end: "(^(\\s+)?(?!\\+))"
             patterns:[
                 {
-                include: "#numbers_"
+                    include: "#numbers_"
                 }
                 {
-                include: "#parameter"
+                    include: "#parameters"
+                }
+                {
+                    include: "#quoted"
+                }
+                {
+                    include: "#comments"
                 }
                 {
                 match: "(?i:((targ|trig|find|when|max|min|rms|pp|avg|deriv|derivative|err\\d?|integ|integral)\\b))"
@@ -257,14 +295,19 @@ repository:
                 "3":
                     name: "variable.other.subckt.spice"
             end: "(^(\\s+)?(?!\\+))"
-            name: "meta.subckt.spice"
+            name: "variable.other.spice"
             patterns:  [
                 {
-                include: "#parameters"
+                    include: "#numbers_"
                 }
                 {
-                match: "\\s+\\S+"
-                name: "variable.other.spice"
+                    include: "#parameters"
+                }
+                {
+                    include: "#quoted"
+                }
+                {
+                    include: "#comments"
                 }
             ]
           }
