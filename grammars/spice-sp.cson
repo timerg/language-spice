@@ -107,6 +107,7 @@ repository:
             match: "(?i:(sweep))"
             name: "support.function.spice"
           }
+
       ]
   elemnts_:
       patterns:  [
@@ -137,33 +138,7 @@ repository:
             ]
           }
           {
-            begin: "(?i:(^(\\s+)?[crlk]\\S*))"
-            beginCaptures:
-                "1":
-                    name: "keyword.other.cplkg.spice"
-            end: "(^(\\s+)?(?!\\+))"
-            name: "variable.parameter.spice"
-            patterns: [
-                {
-                match: "(\\s+\\S+)(\\s+\\S+)"
-                name: "variable.other.spice"
-                }
-                {
-                    include: "#numbers_"
-                }
-                {
-                    include: "#parameters"
-                }
-                {
-                    include: "#quoted"
-                }
-                {
-                    include: "#comments"
-                }
-            ]
-          }
-          {
-            begin: "(?i:(^(\\s+)?[xqmd]\\S+)\\b)"
+            begin: "(?i:(^(\\s+)?[xqmdrlck]\\S+)\\b)"
             beginCaptures:
                 "1":
                     name: "keyword.other.spice"
@@ -217,7 +192,7 @@ repository:
   operation:
       patterns:  [
           {
-            match: "(?i:((\\.print|\\.probe|\\.pz|\\.tf)\\s+(tran|dc|ac)?))"
+            match: "(?i:((\\.print|\\.probe|\\.pz|\\.tf|\\.sens)\\s+(tran|dc|ac)?))"
             name: "keyword.other.spice"
           }
           {
