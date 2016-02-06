@@ -234,9 +234,10 @@ repository:
       patterns:  [
           {
             captures:
-                "1":
-                  name: "keyword.other.spice"
-            match: "(?i:((\\s+)?\\.lib))"
+              "1":
+                name: "keyword.other.spice"
+            match: "(?i:((\\.del(\\s+)lib)|(\\.lib)))"
+            name: "keyword.other.spice"
           }
           {
             captures:

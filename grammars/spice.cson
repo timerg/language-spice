@@ -284,6 +284,10 @@ repository:
             match: "(?i:\\.model)\\b(\\s+\\w+)?(\\s+\\w+)?"
             name: "keyword.other.spice"
           }
+          {
+              match: "(?i:(\\.endl))"
+              name: "keyword.other.spice"
+          }
       ]
   subckt:
       patterns: [
