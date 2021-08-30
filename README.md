@@ -1,2 +1,2 @@
 # language-spice package
-Most of bugs are fixed in the updated version
+This project is deprecated. Please use [Bollos00/language-spice-atom](https://github.com/Bollos00/language-spice-atom)  as an alternative
